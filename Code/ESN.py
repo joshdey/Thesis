@@ -136,6 +136,8 @@ class simple_ESN:
         Yields:
             self.W (NxN array): the internal weight matrix for the simple_ESN
                 object.
+        Returns:
+            W
         """
         try:
             self.N=W.shape[0]
