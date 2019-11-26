@@ -139,7 +139,7 @@ class simple_ESN:
         """
         try:
             self.N=W.shape[0]
-            eigval,eigvec=np.linal.eig(W)
+            eigval,eigvec=np.linalg.eig(W)
             lam=abs(np.amax(eigval))
             W=(rho/lam)*W
             self.W=W
