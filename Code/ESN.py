@@ -81,7 +81,7 @@ class simple_ESN:
 
 
 
-    def generate_W(self,rho=0.8,dens=0.49,edge=None,cont=True, sig=1):
+    def generate_W(self,rho=0.8,dens=0.49,edge=None,cont=True):
         """
         Generates the internal weight matrix W for a simple_ESN object.
 
