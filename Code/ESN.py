@@ -81,7 +81,7 @@ class simple_ESN:
 
 
 
-    def generate_W(self,rho=0.8,dens=0.49,edge=None,cont=True):
+    def generate_W(self,rho=0.8,dens=0.49,edge=None,cont=True, sig=1):
         """
         Generates the internal weight matrix W for a simple_ESN object.
 
@@ -108,12 +108,19 @@ class simple_ESN:
         Asp=nx.to_scipy_sparse_matrix(g,dtype=np.float64)
         W=Asp.toarray()
 
-        if cont is not False:
+        if cont is True:
             for i in range(0,self.N):
                 for j in range(0,self.N):
                     if W[i,j]==1:
                         W[i,j]=self.distribution(binary=self.binary_node,
                         sig=self.W_sig)
+        else:
+            for i in range(0,self.N):
+                for j in range(0,self.N):
+                    if W[i,j]==1:
+                        W[i,j]=self.distribution(binary=0,
+                        sig=self.W_sig)
+
         self.raw_W=W
         eigval=np.linalg.eigvals(W)
         self.eigval=eigval
