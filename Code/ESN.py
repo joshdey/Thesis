@@ -118,7 +118,7 @@ class simple_ESN:
             for i in range(0,self.N):
                 for j in range(0,self.N):
                     if W[i,j]==1:
-                        W[i,j]=self.distribution(binary=0,
+                        W[i,j]=self.distribution(binary=self.binary_node,
                         sig=self.W_sig)
 
         self.raw_W=W
