@@ -37,7 +37,7 @@ class simple_ESN:
             matrix.
     """
 
-    def __init__(self,N=10,K=2,L=2,a=1,binary_node=1,feedback=1,
+    def __init__(self,N=10,K=2,L=2,a=1,binary_node=0,feedback=1,
                  W_sig=1,in_sig=1,fb_sig=1,directed=True):
         self.N=N #number of internal neurons (dim of state vec)
         self.K=K #number of external inputs (dim of input vec)
