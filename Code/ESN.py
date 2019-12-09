@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """
 @author: joshdey
 """
@@ -23,7 +21,7 @@ class simple_ESN:
         a (float): leak rate
         W (NxN array): internal neuron weight array
         W_in (NxK array): input weight array
-        W_out (LxN array): output weight array
+        W_out (Lx(K+N) array): output weight array
         W_fb (NxL array): feedback weight array
         binary_node (boolean): 0 for internal weights to be continuously
             distributed
