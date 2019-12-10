@@ -377,7 +377,7 @@ class simple_ESN:
         self.input=input_dat
         self.states=states
         self.outputs=outputs
-        return outputs
+        return states, outputs
 
     def plot_internal(self,nodes=[0,5],rang=True,times=[100,300],train=True,
         pltnum=1,pltsize=(12,5)):
