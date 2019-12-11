@@ -433,7 +433,7 @@ class simple_ESN:
             s+=cols
 
 
-    def plot_attractor(self,in_ax=0,axes=[0,1],fb=False,save=False,loc=None,
+    def plot_attractor(self,in_ax=0,axes=[0,1],fb=False,save=False,filepath=None,
         name=None):
         """
         Plots the input and outputs of the reservoir computer against each
@@ -451,8 +451,9 @@ class simple_ESN:
         Yields:
             Attractor plot of resevoir input/output. Saves plot if save is True.
         """
-        if loc is None:
-            loc = ='/Users/joshdey/Documents/GitHub/Thesis/Code/Attractorsaves/'
+        if filepath is None:
+            filepath='/Users/joshdey/Documents/GitHub/Thesis/Code/AttractorSaves/'
+        file = filepath+name
         fig=plt.figure(num=2,figsize=(9,9))
         ax=fig.add_subplot(111,projection='3d')
         if fb is False:
@@ -468,7 +469,7 @@ class simple_ESN:
         ax.tick_params(axis='both',which='major',labelsize=0)
         plt.rc('text', usetex=False)
         if save is True:
-            plt.savefig(loc+name,dpi=300)
+            plt.savefig(file,dpi=300)
 
 
 
