@@ -451,6 +451,8 @@ class simple_ESN:
         Yields:
             Attractor plot of resevoir input/output. Saves plot if save is True.
         """
+        if loc is None:
+            loc = ='/Users/joshdey/Documents/GitHub/Thesis/Code/Attractorsaves/'
         fig=plt.figure(num=2,figsize=(9,9))
         ax=fig.add_subplot(111,projection='3d')
         if fb is False:
