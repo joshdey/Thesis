@@ -470,7 +470,7 @@ class simple_ESN:
 
 
 
-    def plot_eigvals(self,norm=False,pltnum=1,pltsize=(8,8)):
+    def plot_eigvals(self,norm=True,pltnum=1,pltsize=(8,8)):
         """
         Plots eigenvalues of the internal weight matrix.
 
