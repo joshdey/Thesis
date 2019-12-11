@@ -502,7 +502,7 @@ class simple_ESN:
             simple_ESN object saved as a .npz file.
         """
         if filepath is None:
-            filepath='/Users/joshdey/Documents/GitHub/Thesis/Code/ESNsaves'
+            filepath='/Users/joshdey/Documents/GitHub/Thesis/Code/ESNsaves/'
         file=filepath+filename
         meta=[self.N,self.K,self.L,self.a,self.binary_node,self.feedback,
               self.W_sig,self.in_sig,self.fb_sig,self.rho,self.W_dens,
