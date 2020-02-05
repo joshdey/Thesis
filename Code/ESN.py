@@ -24,7 +24,7 @@ class simple_ESN:
         W_out (Lx(K+N) array): output weight array
         W_fb (NxL array): feedback weight array
         binary_node (boolean): 0 for internal weights to be continuously
-            distributed
+            distributed, 1 for discrete values
         feedback (boolean): 0 for no feedback, 1 for feedback
         W_sig (float): internal weights are drawn from (-W_sig, W_sig). Note
             that the weights are rescaled to (-rho,rho) later.
@@ -35,17 +35,17 @@ class simple_ESN:
             matrix.
     """
 
-    def __init__(self,N=100,K=1,L=2,a=1,binary_node=0,feedback=1,
+    def __init__(self,N=100,K=1,L=2,a=1,binary_node=0,feedback=0,
                  W_sig=1,in_sig=1,fb_sig=1,directed=True):
-        self.N=N #number of internal neurons (dim of state vec)
-        self.K=K #number of external inputs (dim of input vec)
-        self.L=L #number of outputs (dim of output vec)
+        self.N=N #number of internal neurons (dimension of state vec)
+        self.K=K #number of external inputs (dimension of input vec)
+        self.L=L #number of outputs (dimension of output vec)
         self.a=a #leak rate (no leak=1, total leak=0)
 
-        self.W=np.zeros([N,N]) #initialize all weight arrays
-        self.W_in=np.zeros([N,K]) #initialize all weight arrays
-        self.W_out=np.zeros([L,(K+N)]) #initialize all weight arrays
-        self.W_fb=np.zeros([N,L]) #initialize all weight arrays
+        self.W=np.zeros([N,N])
+        self.W_in=np.zeros([N,K])
+        self.W_out=np.zeros([L,(K+N)])
+        self.W_fb=np.zeros([N,L])
 
         self.binary_node=binary_node
         self.feedback=feedback
@@ -126,7 +126,7 @@ class simple_ESN:
         W=(rho/lam)*W
         self.norm_eigval=(rho/lam)*eigval
         self.W=W
-        return W
+        #return W
 
 
     def specify_W(self,W=None,rho=0.8):
@@ -152,7 +152,7 @@ class simple_ESN:
             self.W=W
         except:
             raise ValueError("Weight matrix must be numpy array")
-        return W
+        #return W
 
     def rescale_W(self,new_rho=1):
         """
@@ -168,7 +168,7 @@ class simple_ESN:
         W=(new_rho/self.rho)*W
         self.rho=new_rho
         self.W=W
-        return W
+        #return W
 
 
     def generate_Win(self,dens=0.49):
@@ -190,7 +190,7 @@ class simple_ESN:
                 if p<dens:
                     W_in[i,j]=self.distribution(binary=False,sig=self.in_sig)
         self.W_in=W_in
-        return W_in
+        #return W_in
 
 
     def generate_Wfb(self,dens=0.49):
@@ -214,7 +214,7 @@ class simple_ESN:
                         W_fb[i,j]=self.distribution(binary=False,
                             sig=self.fb_sig)
         self.W_fb=W_fb
-        return W_fb
+        #return W_fb
 
 
     def train_ESN(self,input_dat=None,teacher=None,around=0,order=None,
@@ -297,7 +297,7 @@ class simple_ESN:
             inv=np.linalg.inv(sq + B*np.identity(sq.shape[0]))
             W_out=np.dot(np.dot(np.transpose(T),M),inv)
         self.W_out=W_out
-        return W_out
+        #return W_out
 
 
 
@@ -377,7 +377,7 @@ class simple_ESN:
         self.input=input_dat
         self.states=states
         self.outputs=outputs
-        return states, outputs
+        #return states, outputs
 
     def plot_internal(self,nodes=[0,5],rang=True,times=[100,300],train=True,
         pltnum=1,pltsize=(12,5)):
