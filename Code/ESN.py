@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 import networkx as nx
 import mpmath as mpm
-import auxiliary as aux
+import aux
 
 
 class simple_ESN:
