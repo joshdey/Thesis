@@ -126,7 +126,7 @@ class simple_ESN:
         W=(rho/lam)*W
         self.norm_eigval=(rho/lam)*eigval
         self.W=W
-        #return W
+        return W
 
 
     def specify_W(self,W=None,rho=0.8):
@@ -152,7 +152,7 @@ class simple_ESN:
             self.W=W
         except:
             raise ValueError("Weight matrix must be numpy array")
-        #return W
+        return W
 
     def rescale_W(self,new_rho=1):
         """
@@ -168,7 +168,7 @@ class simple_ESN:
         W=(new_rho/self.rho)*W
         self.rho=new_rho
         self.W=W
-        #return W
+        return W
 
 
     def generate_Win(self,dens=0.49):
@@ -190,7 +190,7 @@ class simple_ESN:
                 if p<dens:
                     W_in[i,j]=self.distribution(binary=False,sig=self.in_sig)
         self.W_in=W_in
-        #return W_in
+        return W_in
 
 
     def generate_Wfb(self,dens=0.49):
@@ -214,7 +214,7 @@ class simple_ESN:
                         W_fb[i,j]=self.distribution(binary=False,
                             sig=self.fb_sig)
         self.W_fb=W_fb
-        #return W_fb
+        return W_fb
 
 
     def train_ESN(self,input_dat=None,teacher=None,around=0,order=None,
@@ -297,7 +297,7 @@ class simple_ESN:
             inv=np.linalg.inv(sq + B*np.identity(sq.shape[0]))
             W_out=np.dot(np.dot(np.transpose(T),M),inv)
         self.W_out=W_out
-        #return W_out
+        return W_out
 
 
 
@@ -377,7 +377,7 @@ class simple_ESN:
         self.input=input_dat
         self.states=states
         self.outputs=outputs
-        #return states, outputs
+        return states, outputs
 
     def plot_internal(self,nodes=[0,5],rang=True,times=[100,300],train=True,
         pltnum=1,pltsize=(12,5)):
