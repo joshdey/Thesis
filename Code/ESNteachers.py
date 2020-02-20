@@ -109,3 +109,36 @@ def Lorenz(l, dt, initvals=[1.0, 1.0, 1.0], params=[10, 28, 8/3], abserr=1.0e-8,
     ztilde = ztilde.reshape((ztilde.shape[0],1))
 
     return xtilde, ytilde, ztilde
+
+def SL(l, dt, initvals=[1.0,1.0,1.0]):
+
+    def drdt(u,t):
+        x,y,z=u
+
+        xdot=x-(x^2 +y^2)*x
+        ydot=y-(x^2 +y^2)*y
+        zdot=z-z*(abs(z))^2
+
+        f=[xdot,ydot,zdot]
+        return f
+
+    L = list(range(l))
+    t = [dt*i for i in L]
+
+    sols = integrate.odeint(drdt, initvals, t, atol=abserr, rtol=relerr)
+    xsol = sols[:,0]
+    ysol = sols[:,1]
+    zsol = sols[:,2]
+    avgx = np.average(xsol)
+    avgy = np.average(ysol)
+    avgz = np.average(zsol)
+
+    xtilde = np.divide((xsol-avgx),np.sqrt(np.average((xsol-avgx)**2)))
+    ytilde = np.divide((ysol-avgy),np.sqrt(np.average((ysol-avgy)**2)))
+    ztilde = np.divide((zsol-avgz),np.sqrt(np.average((zsol-avgz)**2)))
+
+    xtilde = xtilde.reshape((xtilde.shape[0],1))
+    ytilde = ytilde.reshape((ytilde.shape[0],1))
+    ztilde = ztilde.reshape((ztilde.shape[0],1))
+
+    return xtilde, ytilde, ztilde
