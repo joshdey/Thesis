@@ -433,7 +433,7 @@ class simple_ESN:
             s+=cols
 
 
-    def plot_attractor(self,in_ax=0,axes=[0,1],fb=False,save=False,filepath=None,
+    def plot_attractor(self,in_ax=0,axes=[0,1],fb=False,save=True,filepath=None,
         name=None):
         """
         Plots the input and outputs of the reservoir computer against each
@@ -453,6 +453,8 @@ class simple_ESN:
         """
         if filepath is None:
             filepath='/Users/joshdey/Documents/GitHub/Thesis/Code/AttractorSaves/'
+        if name is None:
+            name='test'
         file = filepath+name
         fig=plt.figure(num=2,figsize=(9,9))
         ax=fig.add_subplot(111,projection='3d')
