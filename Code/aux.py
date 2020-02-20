@@ -8,6 +8,7 @@ import math as mt
 import ESN as esn
 import scipy.io as sio
 import matplotlib.pyplot as plt
+import ESNteachers
 
 def RMS(act,exp):
     """
