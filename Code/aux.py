@@ -143,4 +143,5 @@ def esn_wrapper(N=400,fb=0,rho=1,new_rho=1,W_sig=1,in_sig=.25, fb_sig=1,
     rms=[RMS(run1, act1), RMS(run2, act2)]
     rmse1=RMS_over_t(run1, act1)
     rmse2=RMS_over_t(run2, act2)
-    return out, rms, rmse1, rmse2
+    plot=ESN.plot_attractor()
+    return out, rms, rmse1, rmse2, plot
