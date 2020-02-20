@@ -110,7 +110,8 @@ def Lorenz(l, dt, initvals=[1.0, 1.0, 1.0], params=[10, 28, 8/3], abserr=1.0e-8,
 
     return xtilde, ytilde, ztilde
 
-def SL(l, dt, initvals=[1.0,1.0,1.0]):
+def SL(l, dt, initvals=[1.0,1.0,1.0],abserr=1.0e-8,
+            relerr=1.0e-6):
 
     def drdt(u,t):
         x,y,z=u
