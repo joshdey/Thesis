@@ -61,7 +61,7 @@ def ReLU(x_in,coeffs):
 
 def ESN_wrapper(teach_in,teach_out,run,N=400,fb=0,rho=1,W_sig=1,in_sig=1,fb_sig=1,
                 dens=0.05,in_dens=0.8,fb_dens=0.1,a=1,noise=0.0,bias=1,bin_node=0,
-                wo=100,MP=True,B=0.1,around=0,order=None,directed=True):
+                wo=100,MP=True,B=0.1,around=0,order=None,directed=True,name=None):
     """
     Wrapper for initializing, training, and running an ESN. Nice for parameter
     searches/generating large data sets for performance comparison. Returns
@@ -71,7 +71,8 @@ def ESN_wrapper(teach_in,teach_out,run,N=400,fb=0,rho=1,W_sig=1,in_sig=1,fb_sig=
     out_dims=teach_out.shape
 
     ESN=esn.simple_ESN(N=N,K=in_dims[1],L=out_dims[1],a=a,binary_node=bin_node,
-                       feedback=fb,W_sig=W_sig,in_sig=in_sig,fb_sig=fb_sig,directed=directed)
+                       feedback=fb,W_sig=W_sig,in_sig=in_sig,fb_sig=fb_sig,
+                       directed=directed)
     ESN.generate_W(rho=rho,dens=dens)
     ESN.generate_Win(dens=in_dens)
     if fb==1:
@@ -82,4 +83,5 @@ def ESN_wrapper(teach_in,teach_out,run,N=400,fb=0,rho=1,W_sig=1,in_sig=1,fb_sig=
     ESN.run_ESN(input_dat=run,around=around,order=order,time=run_dims[0],init='last')
 
     out=ESN.outputs
-    return out
+    plot=ESN.plot_attractor(name=name)
+    return out,plot
