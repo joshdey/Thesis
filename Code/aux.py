@@ -125,7 +125,7 @@ def esn_wrapper(N=400,fb=0,rho=1,new_rho=1,W_sig=1,in_sig=.25, fb_sig=1,
 
     ESN=esn.simple_ESN(N=N, K=in_dims[1], L=out_dims[1], a=a,
                         binary_node=bin_node, feedback=fb, W_sig=W_sig,
-                        in_sig=in_sig, fb_sig=fb_sig, directed)
+                        in_sig=in_sig, fb_sig=fb_sig, directed=directed)
     ESN.generate_W(rho=rho, dens=dens)
     ESN.rescale_W(new_rho=new_rho)
     ESN.generate_Win(dens=in_dens)
