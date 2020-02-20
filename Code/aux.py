@@ -136,7 +136,7 @@ def esn_wrapper(N=400,fb=0,rho=1,new_rho=1,W_sig=1,in_sig=.25, fb_sig=1,
                     order=order,washout=wo,noise=noise,bias=bias,mp=MP,B=B)
     run_dims=run.shape
     ESN.run_ESN(input_dat=run,around=around,order=order,time=run_dims[0],
-                init='last')
+                init='zero')
     out=ESN.outputs
     run1, run2=np.hsplit(out, 2)
 
