@@ -6,7 +6,7 @@ import random as rn
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 import networkx as nx
-import mpmath as mp
+import mpmath as mpm
 import aux
 
 
@@ -245,8 +245,6 @@ class simple_ESN:
             self.W_out (LxN array): trained simple_ESN output weights.
         """
         time=teacher.shape[0] #(time,L)
-        if input_dat is None:
-            input_dat=np.zeros([time,self.K])
         if order=='power':
             coeffs=np.array(around)
             update=aux.taylor_exp
@@ -257,9 +255,9 @@ class simple_ESN:
                 coeffs=around
             update=aux.ReLU
         elif isinstance(order,int) is True:
-            mp.dps=16
-            mp.pretty=True
-            coeffs=np.array(mp.chop(mp.taylor(mp.tanh,around,order)),
+            mpm.dps=16
+            mpm.pretty=True
+            coeffs=np.array(mpm.chop(mpm.taylor(mpm.tanh,around,order)),
                 dtype=np.float64)
             update=aux.taylor_exp
         else:
@@ -347,9 +345,9 @@ class simple_ESN:
                 coeffs=around
             update=aux.ReLU
         elif isinstance(order,int) is True:
-            mp.dps=16
-            mp.pretty=True
-            coeffs=np.array(mp.chop(mp.taylor(mp.tanh,around,order)),
+            mpm.dps=16
+            mpm.pretty=True
+            coeffs=np.array(mpm.chop(mpm.taylor(mpm.tanh,around,order)),
                 dtype=np.float64)
             update=aux.taylor_exp
         else:

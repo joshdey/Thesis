@@ -10,6 +10,20 @@ def sine_teacher(length=300,dt=0.01,f=8,amp=0.5):
     teach[:,0]=amp*np.sin(f*np.pi*teach[:,0])
     return teach
 
+def cosine_teacher(length=300,dt=0.01,f=8,amp=0.5):
+    time=length*dt
+    teach=np.zeros([length,1])
+    teach[:,0]=np.arange(0,time,dt)
+    teach[:,0]=amp*np.cos(f*np.pi*teach[:,0])
+    return teach
+
+def linear_teacher(length=300, dt=0.01):
+    time=length*dt
+    teach=np.zeros([length, 1])
+    teach[:,0]=np.arange(0,time,dt)
+    teach[:,0]=1*teach[:,0]
+    return teach
+
 def Rossler(l, dt, initvals=[2.0, 0, 0], params=[0.5, 2.0, 4.0],
             abserr=1.0e-8, relerr=1.0e-6):
     """
@@ -110,15 +124,16 @@ def Lorenz(l, dt, initvals=[1.0, 1.0, 1.0], params=[10, 28, 8/3], abserr=1.0e-8,
 
     return xtilde, ytilde, ztilde
 
-def SL(l, dt, initvals=[1.0,1.0,1.0],abserr=1.0e-8,
+def SL(l, dt, initvals=[1.0,1.0,1.0],params=[1.0,1.0,1.0],abserr=1.0e-8,
             relerr=1.0e-6):
 
-    def drdt(u,t):
+    def drdt(u,t,p):
         x,y,z=u
+        a,b,c = p
 
-        xdot=x-(x^2 +y^2)*x
-        ydot=y-(x^2 +y^2)*y
-        zdot= z*(1-abs(z)^2)
+        xdot=a*x-(x**2 +y**2)*a*x
+        ydot=b*y-(x**2 +y**2)*b*y
+        zdot= -c*z
 
         f=[xdot,ydot,zdot]
         return f
@@ -126,7 +141,7 @@ def SL(l, dt, initvals=[1.0,1.0,1.0],abserr=1.0e-8,
     L = list(range(l))
     t = [dt*i for i in L]
 
-    sols = integrate.odeint(drdt, initvals, t, atol=abserr, rtol=relerr)
+    sols = integrate.odeint(drdt, initvals, t, args=(params,), atol=abserr, rtol=relerr)
     xsol = sols[:,0]
     ysol = sols[:,1]
     zsol = sols[:,2]
