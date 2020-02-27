@@ -87,9 +87,9 @@ def ESN_wrapper(teach_in,teach_out,run,N=400,fb=0,rho=1,W_sig=1,in_sig=.25,fb_si
     out=ESN.outputs
     return out
 
-def esn_wrapper(N=400,fb=0,rho=1,new_rho=1,W_sig=1,in_sig=.25, fb_sig=1,
+def esn_wrapper(N=400,fb=0,rho=0.8,new_rho=1,W_sig=1,in_sig=.25, fb_sig=1,
                 dens=0.25,in_dens=0.8,fb_dens=0,a=1,noise=0.0,bias=0,
-                bin_node=0,wo=100,MP=True,B=0.1,around=1,order=1,directed=True,
+                bin_node=0,wo=100,MP=True,B=0.01,around=1,order=1,directed=True,
                 teacher_system=None, directions=0,train_time=400,
                 run_time=30000, dt=0.01):
     """
@@ -99,7 +99,7 @@ def esn_wrapper(N=400,fb=0,rho=1,new_rho=1,W_sig=1,in_sig=.25, fb_sig=1,
     """
     if teacher_system=='Rossler':
         xteach, yteach, zteach=ESNteachers.Rossler(l=train_time, dt=dt)
-        fullrun=ESNteachers.Rossler(l=run_time,dt=dt)[directions]
+        fullrun=ESNteachers.Rossler(l=run_time,dt=dt)
         run=fullrun[directions]
     else:
         xteach, yteach, zteach=ESNteachers.Lorenz(l=train_time, dt=dt)
@@ -144,4 +144,4 @@ def esn_wrapper(N=400,fb=0,rho=1,new_rho=1,W_sig=1,in_sig=.25, fb_sig=1,
     rmse1=RMS_over_t(run1, act1)
     rmse2=RMS_over_t(run2, act2)
     plot=ESN.plot_attractor()
-    return run1, run2, rms, rmse1, rmse2, plot
+    return act1, act2, run1, run2, rms, rmse1, rmse2, plot

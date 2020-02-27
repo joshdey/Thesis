@@ -6,7 +6,7 @@ import random as rn
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 import networkx as nx
-import mpmath as mpm
+import mpmath as mp
 import aux
 
 
@@ -257,9 +257,9 @@ class simple_ESN:
                 coeffs=around
             update=aux.ReLU
         elif isinstance(order,int) is True:
-            mpm.dps=16
-            mpm.pretty=True
-            coeffs=np.array(mpm.chop(mpm.taylor(mpm.tanh,around,order)),
+            mp.dps=16
+            mp.pretty=True
+            coeffs=np.array(mp.chop(mp.taylor(mp.tanh,around,order)),
                 dtype=np.float64)
             update=aux.taylor_exp
         else:
@@ -301,7 +301,7 @@ class simple_ESN:
 
 
 
-    def run_ESN(self,input_dat=None,around=0,order=None,time=200,init='last',
+    def run_ESN(self,input_dat=None,around=0,order=None,time=200,init='zero',
         force_start=None):
         """
         Runs the resevoir computer for a given number of time steps, with or
@@ -347,9 +347,9 @@ class simple_ESN:
                 coeffs=around
             update=aux.ReLU
         elif isinstance(order,int) is True:
-            mpm.dps=16
-            mpm.pretty=True
-            coeffs=np.array(mpm.chop(mpm.taylor(mpm.tanh,around,order)),
+            mp.dps=16
+            mp.pretty=True
+            coeffs=np.array(mp.chop(mp.taylor(mp.tanh,around,order)),
                 dtype=np.float64)
             update=aux.taylor_exp
         else:
@@ -377,7 +377,7 @@ class simple_ESN:
         self.input=input_dat
         self.states=states
         self.outputs=outputs
-        return states, outputs
+        return states
 
     def plot_internal(self,nodes=[0,5],rang=True,times=[100,300],train=True,
         pltnum=1,pltsize=(12,5)):

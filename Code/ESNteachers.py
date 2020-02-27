@@ -8,9 +8,7 @@ def sine_teacher(length=300,dt=0.01,f=8,amp=0.5):
     teach=np.zeros([length,1])
     teach[:,0]=np.arange(0,time,dt)
     teach[:,0]=amp*np.sin(f*np.pi*teach[:,0])
-    t=np.zeros([length, 1])
-    t = np.arange(0, time, dt)
-    return time,teach
+    return teach
 
 def Rossler(l, dt, initvals=[2.0, 0, 0], params=[0.5, 2.0, 4.0],
             abserr=1.0e-8, relerr=1.0e-6):
@@ -120,7 +118,7 @@ def SL(l, dt, initvals=[1.0,1.0,1.0],abserr=1.0e-8,
 
         xdot=x-(x^2 +y^2)*x
         ydot=y-(x^2 +y^2)*y
-        zdot=-z
+        zdot= z*(1-abs(z)^2)
 
         f=[xdot,ydot,zdot]
         return f
