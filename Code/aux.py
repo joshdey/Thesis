@@ -87,11 +87,11 @@ def ESN_wrapper(teach_in,teach_out,run,N=400,fb=0,rho=1,W_sig=1,in_sig=.25,fb_si
     out=ESN.outputs
     return out
 
-def esn_wrapper(N=400,fb=0,rho=0.8,new_rho=1,W_sig=1,in_sig=.25, fb_sig=1,
+def esn_wrapper(N=400,fb=0,rho=0.7,new_rho=0.7,W_sig=1,in_sig=.25, fb_sig=1,
                 dens=0.25,in_dens=0.8,fb_dens=0,a=1,noise=0.0,bias=0,
-                bin_node=0,wo=100,MP=True,B=0.01,around=1,order=1,directed=True,
-                teacher_system=None, directions=0,train_time=400,
-                run_time=30000, dt=0.01):
+                bin_node=0,wo=100,MP=False,B=10**-6,around=1,order=1,directed=True,
+                teacher_system='Lorenz', directions=0,train_time=400,
+                run_time=10000, dt=0.01, init='zero'):
     """
     wrapper for initializing, training, and running the ESN.
     Inputs: ESN parameters, teacher input, teacher output, and running input.
@@ -136,12 +136,9 @@ def esn_wrapper(N=400,fb=0,rho=0.8,new_rho=1,W_sig=1,in_sig=.25, fb_sig=1,
                     order=order,washout=wo,noise=noise,bias=bias,mp=MP,B=B)
     run_dims=run.shape
     ESN.run_ESN(input_dat=run,around=around,order=order,time=run_dims[0],
-                init='last')
+                init='zero')
     out=ESN.outputs
     run1, run2=np.hsplit(out, 2)
 
     rms=[RMS(run1, act1), RMS(run2, act2)]
-    rmse1=RMS_over_t(run1, act1)
-    rmse2=RMS_over_t(run2, act2)
-    plot=ESN.plot_attractor()
-    return act1, act2, run1, run2, rms, rmse1, rmse2, plot
+    return rms
