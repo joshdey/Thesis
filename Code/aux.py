@@ -88,7 +88,7 @@ def ESN_wrapper(teach_in,teach_out,run,N=400,fb=0,rho=1,W_sig=1,in_sig=.25,fb_si
     return out
 
 def esn_wrapper(N=400,fb=0,rho=0.7,new_rho=0.7,W_sig=1,in_sig=.25, fb_sig=1,
-                dens=0.25,in_dens=0.8,fb_dens=0,a=1,noise=0.0,bias=0,
+                dens=0.20,in_dens=0.8,fb_dens=0,a=1,noise=0.0,bias=0,
                 bin_node=0,wo=100,MP=False,B=10**-6,around=1,order=1,directed=True,
                 teacher_system='Lorenz', directions=0,train_time=400,
                 run_time=10000, dt=0.01, init='zero'):
