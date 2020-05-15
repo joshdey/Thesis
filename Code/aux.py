@@ -11,18 +11,12 @@ import matplotlib.pyplot as plt
 import ESNteachers
 
 def RMS(act,exp):
-    """
-    act: actual generated values
-    exp: expected values
-
-    Both inputs should be numpy arrays
-    """
     act=act.reshape((act.shape[0],1))
     exp=exp.reshape((exp.shape[0],1))
     try:
         resid=np.square(act-exp)
     except:
-        raise IndexError("Indices of act and exp do not match")
+        raise IndexError("Indices of act and exp don't match")
     resid=np.sum(resid)
     n=act.shape[0]
     rms=mt.sqrt(resid/n)
@@ -30,18 +24,10 @@ def RMS(act,exp):
     return rms
 
 def RMS_over_t(act,exp):
-    """
-    Returns the RMS at each time step for many time steps
-
-    act:(time,vals) array of generated values
-    exp:(time,vals) array of expected values
-
-    returns: (time, RMS) array of rms values
-    """
     try:
         resid=np.square(act-exp)
     except:
-        raise IndexError("Indices of act and exp probably do not match")
+        raise IndexError("Indices of act and exp don't match")
     resid=np.sum(resid,axis=1)
     n=act.shape[1]
     rms=np.sqrt(resid/n)
@@ -63,11 +49,6 @@ def ReLU(x_in,coeffs):
 def ESN_wrapper(teach_in,teach_out,run,N=400,fb=0,rho=1,W_sig=1,in_sig=.25,fb_sig=1,
                 dens=0.25,in_dens=0.8,fb_dens=0.1,a=1,noise=0.0,bias=0,bin_node=0,
                 wo=100,MP=True,B=0.1,around=0,order=None,directed=True):
-    """
-    Wrapper for initializing, training, and running an ESN. Nice for parameter
-    searches/generating large data sets for performance comparison. Returns
-    ESN.outputs, the generated predictions of the output.
-    """
     in_dims=teach_in.shape
     out_dims=teach_out.shape
 
@@ -92,11 +73,7 @@ def esn_wrapper(N=400,fb=0,rho=0.7,new_rho=0.7,W_sig=1,in_sig=.25, fb_sig=1,
                 bin_node=0,wo=100,MP=False,B=10**-6,around=1,order=1,directed=True,
                 teacher_system='Lorenz', directions=0,train_time=400,
                 run_time=10000, dt=0.01, init='zero'):
-    """
-    wrapper for initializing, training, and running the ESN.
-    Inputs: ESN parameters, teacher input, teacher output, and running input.
-    Output(s): TBD
-    """
+
     if teacher_system=='Rossler':
         xteach, yteach, zteach=ESNteachers.Rossler(l=train_time, dt=dt)
         fullrun=ESNteachers.Rossler(l=run_time,dt=dt)

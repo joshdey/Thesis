@@ -121,8 +121,11 @@ def Lorenz(l, dt, initvals=[1.0, 1.0, 1.0], params=[10, 28, 8/3], abserr=1.0e-8,
     xtilde = xtilde.reshape((xtilde.shape[0],1))
     ytilde = ytilde.reshape((ytilde.shape[0],1))
     ztilde = ztilde.reshape((ztilde.shape[0],1))
+    xsol = xsol.reshape((xsol.shape[0],1))
+    ysol = ysol.reshape((ysol.shape[0],1))
+    zsol = zsol.reshape((zsol.shape[0],1))
 
-    return xtilde, ytilde, ztilde
+    return xsol, ysol, zsol
 
 def SL(l, dt, initvals=[1.0,1.0,1.0],params=[1.0,1.0,1.0],abserr=1.0e-8,
             relerr=1.0e-6):
